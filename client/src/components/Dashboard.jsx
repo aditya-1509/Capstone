@@ -1,7 +1,6 @@
 import React from 'react'
 import { redirect } from 'react-router-dom'
 const Dashboard = () => {
-  const navigate = useNavigation();
   return (
     <div>
       <h1 className="text-3xl font-bold underline">Dashboard</h1>
