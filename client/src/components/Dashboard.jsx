@@ -1,13 +1,18 @@
 import React from 'react'
-import { redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
 const Dashboard = () => {
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.clear()
+    navigate('/login')
+  }
+
   return (
     <div>
       <h1 className="text-3xl font-bold underline">Dashboard</h1>
-      <button onClick={()=>{
-        localStorage.clear()
-        redirect('/login')
-      }}>Logout</button>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   )
 }
