@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from "../context/AuthContext";
 
 const Dashboard = () => {
+  const { token,setToken } = useContext(AuthContext);
   const navigate = useNavigate()
 
   const handleLogout = () => {
     localStorage.clear()
+    setToken(null)
     navigate('/login')
   }
 
