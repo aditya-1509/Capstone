@@ -12,11 +12,21 @@ app.use(cors({
   credentials: true
 }));
 
-connectDB();
+
+const ensureDBConnection = async (req, res, next) => {
+  try {
+    await connectDB();
+    next(); 
+  } catch (error) {
+    console.error("Database connection error in middleware:", error);
+    res.status(500).json({ message: "Database connection error" });
+  }
+};
+
 
 app.use(express.json());
 
-app.use('/api/auth', authRouter);
+app.use('/api/auth', ensureDBConnection, authRouter);
 
 app.get('/', (req, res) => {
   res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
